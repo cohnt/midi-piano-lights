@@ -54,7 +54,7 @@ def time_brightness_curve(t):
 		return 0
 	denom = 1 + math.exp(-t + 3)
 	out = 1 - (1 / denom)
-	return out * 0.75
+	return out * 0.5
 
 pygame.midi.init()
 input_device = pygame.midi.Input(3)
