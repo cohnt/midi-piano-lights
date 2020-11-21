@@ -119,11 +119,14 @@ try:
 		# Update the pixels
 		for i in range(n_keys):
 			this_key_brightness = brightness[i]
-			this_key_color = (
-				int(this_key_brightness * 255 * colormap(domain_to_color_pos(key_idx_to_domain(i)))[0]),
-				int(this_key_brightness * 255 * colormap(domain_to_color_pos(key_idx_to_domain(i)))[1]),
-				int(this_key_brightness * 255 * colormap(domain_to_color_pos(key_idx_to_domain(i)))[2])
-			)
+			if(this_key_brightness > 0):
+				this_key_color = (
+					int(this_key_brightness * 255 * colormap(domain_to_color_pos(key_idx_to_domain(i)))[0]),
+					int(this_key_brightness * 255 * colormap(domain_to_color_pos(key_idx_to_domain(i)))[1]),
+					int(this_key_brightness * 255 * colormap(domain_to_color_pos(key_idx_to_domain(i)))[2])
+				)
+			else:
+				this_key_color = (0, 0, 0)
 			this_key_pixels = key_idx_to_strip_leds(i)
 			for j in this_key_pixels:
 				pixels[j] = this_key_color
