@@ -7,6 +7,11 @@ n_keys = 88
 min_key = 21
 max_key = 108
 color = (255, 0, 0)
+important_statuses = {
+	"time_update": 248,
+	"pedal": 176,
+	"note": 148
+}
 
 key_status = [False for _ in range(n_keys)]
 keypress_times = [0 for _ in range(n_keys)]
@@ -48,8 +53,13 @@ try:
 			note_number = data[1]
 			velocity = data[2]
 
-			if status != 248:
-				# status 248 is just a clock message
-				print("%d\t%d\t%d" % (timestamp, note_number, velocity))
+			if status == important_statuses["time_update"]:
+				# We can ignore time updates
+				continue
+			elif status == important_statuses["pedal"]:
+				down = velocity > 0
+				print("T=%d\tPedal%s" % (timestamp, down))
+			elif status == important_statuses["note"]:
+				print("T=%d\tNote=%d\tVel=%d" % (timestamp, note_number, velocity))
 except KeyboardInterrupt:
 	print("Exiting...")
