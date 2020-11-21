@@ -111,7 +111,7 @@ try:
 		# Update brightness levels
 		current_time = time.time()
 		for i in range(n_keys):
-			if(key_status[i] == False and not pedaled_notes[i]):
+			if(key_status[i] == False and not (pedal_mode and pedaled_notes[i])):
 				brightness[i] = 0
 			else:
 				brightness[i] = time_brightness_curve(current_time - keypress_times[i])
