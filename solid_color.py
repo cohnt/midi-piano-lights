@@ -28,7 +28,7 @@ def key_idx_to_strip_leds(idx):
 	# Flip (because my controller is on the right side)
 	temp = low
 	low = 1 - high
-	high = 1 - low
+	high = 1 - temp
 	# Map to [0, n_pixels)
 	low = int(low * n_pixels)
 	high = int(high * n_pixels)
