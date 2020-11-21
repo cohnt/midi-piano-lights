@@ -98,7 +98,7 @@ try:
 				int(this_key_brightness * color[2]),
 			)
 			this_key_pixels = key_idx_to_strip_leds(i)
-			for j in range(len(this_key_pixels)):
+			for j in this_key_pixels:
 				pixels[j] = this_key_color
 		pixels.show()
 	#
