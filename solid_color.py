@@ -64,3 +64,4 @@ try:
 				print("T=%d\tNote=%d %s\tVel=%d" % (timestamp, note_number, "Down" if down else "Up", velocity))
 except KeyboardInterrupt:
 	print("Exiting...")
+	input_device.close()
