@@ -20,8 +20,8 @@ colormap = cm.get_cmap(colormap_name)
 colors = [colormap(float(i) / (n_keys-1)) for i in range(n_keys)]
 for i in range(n_keys):
 	c = (
-		colors[i][0] * 255
-		colors[i][1] * 255
+		colors[i][0] * 255,
+		colors[i][1] * 255,
 		colors[i][2] * 255
 	)
 	colors[i] = c
