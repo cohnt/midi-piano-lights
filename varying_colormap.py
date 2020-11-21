@@ -17,13 +17,13 @@ important_statuses = {
 	"note": 144
 }
 # List of colormaps: https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html
-colormap_name = "hsv"
+colormap_name = "autumn"
 colormap = cm.get_cmap(colormap_name)
-domain_low = 2 * math.pi
-domain_high = 6 * math.pi
-domain_drift = 0.5 * math.pi
+domain_low = 3 * math.pi
+domain_high = 9 * math.pi
+domain_drift = 1 * math.pi
 domain_min = 0
-domain_max = 8*math.pi
+domain_max = 12 * math.pi
 domain_margin = math.pi
 
 pedal_mode = False
