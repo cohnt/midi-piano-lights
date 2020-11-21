@@ -3,7 +3,7 @@ import board
 import neopixel
 
 n_pixels = 177
-n_keys = 88.0
+n_keys = 88
 min_key = 21
 max_key = 108
 color = (255, 0, 0)
