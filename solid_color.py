@@ -10,7 +10,7 @@ color = (255, 0, 0)
 important_statuses = {
 	"time_update": 248,
 	"pedal": 176,
-	"note": 148
+	"note": 144
 }
 
 key_status = [False for _ in range(n_keys)]
