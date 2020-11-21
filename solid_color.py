@@ -69,10 +69,10 @@ try:
 			elif status == important_statuses["pedal"]:
 				# Not using the pedal for now, but print it for debugging purposes
 				down = velocity > 0
-				print("T=%d\tPedal %s" % (timestamp, "Down" if down else "Up"))
+				print("T=%d\tPedal %s" % (timestamp, "Down" if down else "Up  "))
 			elif status == important_statuses["note"]:
 				down = velocity > 0
-				print("T=%d\tNote=%d (%s) %s\tVel=%d" % (timestamp, note_number, number_to_note(note_number), "Down" if down else "Up", velocity))
+				print("T=%d\tNote=%d (%s) %s\tVel=%d" % (timestamp, note_number, number_to_note(note_number), "Down" if down else "Up  ", velocity))
 				# Update note status
 				key_idx = note_to_key_idx(note_number)
 				if down:
