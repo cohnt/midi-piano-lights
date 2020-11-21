@@ -19,9 +19,11 @@ colormap_name = "viridis"
 colormap = cm.get_cmap(colormap_name)
 colors = [colormap(float(i) / (n_keys-1)) for i in range(n_keys)]
 for i in range(n_keys):
-	colors[i][0] = colors[i][0] * 255
-	colors[i][1] = colors[i][1] * 255
-	colors[i][2] = colors[i][2] * 255
+	c = (0, 0, 0)
+	c[0] = colors[i][0] * 255
+	c[1] = colors[i][1] * 255
+	c[2] = colors[i][2] * 255
+	colors[i] = c
 
 pedal_mode = True
 
