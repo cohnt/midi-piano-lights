@@ -15,7 +15,8 @@ important_statuses = {
 	"pedal": 176,
 	"note": 144
 }
-colormap_name = "viridis"
+# List of colormaps: https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html
+colormap_name = "hsv"
 colormap = cm.get_cmap(colormap_name)
 colors = [colormap(float(i) / (n_keys-1)) for i in range(n_keys)]
 for i in range(n_keys):
