@@ -17,7 +17,7 @@ important_statuses = {
 }
 colormap_name = "viridis"
 colormap = cm.get_cmap(colormap_name)
-colors = [colormap(float(i) / (n_keys-1)) for i in range(n_keys)]
+colors = [colormap(255 * float(i) / (n_keys-1)) for i in range(n_keys)]
 
 pedal_mode = True
 
