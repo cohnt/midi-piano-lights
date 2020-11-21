@@ -40,10 +40,16 @@ try:
 		# Get new MIDI input if any is available
 		if input_device.poll():
 			event = input_device.read(1)[0]
+
 			data = event[0]
 			timestamp = event[1]
+
+			status = data[0]
 			note_number = data[1]
 			velocity = data[2]
-			print("%d\t%d\t%d" % (timestamp, note_number, velocity))
+
+			if status != 248:
+				# status 248 is just a clock message
+				print("%d\t%d\t%d" % (timestamp, note_number, velocity))
 except KeyboardInterrupt:
 	print("Exiting...")
