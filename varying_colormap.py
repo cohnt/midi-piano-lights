@@ -24,7 +24,7 @@ domain_drift = 0.5 * math.pi
 min_domain_dist = math.pi
 max_domain_dist = 8*math.pi
 
-pedal_mode = True
+pedal_mode = False
 
 key_status = [False for _ in range(n_keys)]
 keypress_times = [0 for _ in range(n_keys)]
