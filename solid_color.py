@@ -33,7 +33,7 @@ def number_to_note(number):
 	return notes[number%12]
 
 pygame.midi.init()
-my_input = pygame.midi.Input(3)
+input_device = pygame.midi.Input(3)
 
 try:
 	while True:
