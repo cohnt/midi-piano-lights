@@ -4,4 +4,4 @@ Collection of scripts and other information for connecting an LED strip to an el
 
 To run on startup, add the following line to `/etc/rc.local`:
 
-```sudo /absolute/path/to/midi-piano-lights/startup.sh```
+```sudo python3 /absolute/path/to/midi-piano-lights/selected_python_script.py```
