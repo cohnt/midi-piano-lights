@@ -48,11 +48,14 @@ def number_to_note(number):
 	return notes[number%12]
 
 def time_brightness_curve(t):
-	if t > 8:
-		return 0
-	denom = 1 + math.exp(-t * 4)
-	out = 1 - (1 / denom)
-	return out * 2
+	if t <= 0.25:
+		denom = 1 + math.exp(-t * 8)
+		out = 1 - (1 / denom)
+		return out * 2
+	else:
+		denom = 1 + math.exp(-2 - (0.5 * (t - 0.25)))
+		out = 1 - (1 / denom)
+		return out * 2
 
 pygame.midi.init()
 input_device = pygame.midi.Input(3)
