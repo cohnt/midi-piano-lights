@@ -40,10 +40,9 @@ def number_to_note(number):
 	return notes[number%12]
 
 def time_brightness_curve(t):
-	if t > 6000:
+	if t > 8:
 		return 0
-	inner_exp_frac = (-t + 2500) / 500
-	denom = 1 + math.exp(inner_exp_frac)
+	denom = 1 + math.exp(-t + 4)
 	out = 1 - (1 / denom)
 	return out
 
@@ -80,7 +79,7 @@ try:
 					keypress_times[key_idx] = time.time()
 				else:
 					key_status[key_idx] = False
-					keypress_times[key_idx] = -1
+					keypress_times[key_idx] = 0
 		#
 		# Update brightness levels
 		current_time = time.time()
