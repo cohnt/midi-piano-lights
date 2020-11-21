@@ -1,6 +1,7 @@
 import pygame.midi
 import board
 import neopixel
+import math
 
 n_pixels = 177
 n_keys = 88
@@ -36,6 +37,14 @@ def number_to_note(number):
 	# Only needed for debugging
 	notes = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b']
 	return notes[number%12]
+
+def time_brightness_curve(t):
+	if t > 6000:
+		return 0
+	inner_exp_frac = (-t + 2500) / 500
+	denom = 1 + math.exp(inner_exp_frac)
+	out = 1 - (1 / denom)
+	return out
 
 pygame.midi.init()
 input_device = pygame.midi.Input(3)
