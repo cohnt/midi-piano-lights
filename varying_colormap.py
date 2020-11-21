@@ -5,6 +5,7 @@ import math
 import time
 from brightness_curve import time_brightness_curve
 from matplotlib import cm
+import random
 
 n_pixels = 177
 n_keys = 88
@@ -18,11 +19,12 @@ important_statuses = {
 # List of colormaps: https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html
 colormap_name = "hsv"
 colormap = cm.get_cmap(colormap_name)
-domain_low = 0
-domain_high = 4 * math.pi
+domain_low = 2 * math.pi
+domain_high = 6 * math.pi
 domain_drift = 0.5 * math.pi
-min_domain_dist = math.pi
-max_domain_dist = 8*math.pi
+domain_min = 0
+domain_max = 8*math.pi
+domain_margin = math.pi
 
 pedal_mode = False
 
@@ -68,6 +70,8 @@ def domain_to_color_pos(x):
 pygame.midi.init()
 input_device = pygame.midi.Input(3)
 
+current_time = time.time()
+last_time = current_time
 try:
 	while True:
 		# Get new MIDI input if any is available
@@ -131,6 +135,24 @@ try:
 			for j in this_key_pixels:
 				pixels[j] = this_key_color
 		pixels.show()
+		#
+		# Do the random walk
+		dt = current_time - last_time
+		left_movement = random.randint(0, 1) * 2 - 1
+		right_movement = random.randint(0, 1) * 2 - 1
+		if domain_low + (left_movement * domain_drift * dt) < domain_min:
+			pass
+		elif domain_low + (left_movement * domain_drift * dt) > domain_high - domain_margin:
+			pass
+		else:
+			domain_low = domain_low + (left_movement * domain_drift * dt)
+		if domain_high + (right_movement * domain_drift * dt) > domain_max:
+			pass
+		elif domain_high + (right_movement * domain_drift * dt) < domain_low + domain_margin:
+			pass
+		else:
+			domain_high = domain_high + (right_movement * domain_drift * dt)
+		last_time = current_time
 	#
 except KeyboardInterrupt:
 	print("Exiting...")
