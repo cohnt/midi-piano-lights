@@ -15,9 +15,13 @@ important_statuses = {
 	"note": 144
 }
 
+pedal_mode = True
+
 key_status = [False for _ in range(n_keys)]
 keypress_times = [0 for _ in range(n_keys)]
 brightness = [0 for _ in range(n_keys)]
+pedal_status = False
+pedaled_notes = [False for _ in range(n_keys)]
 
 pixels = neopixel.NeoPixel(board.D18, n_pixels, brightness=1.0, auto_write=False, pixel_order=neopixel.GRB)
 
@@ -70,9 +74,16 @@ try:
 				# We can ignore time updates
 				continue
 			elif status == important_statuses["pedal"]:
-				# Not using the pedal for now, but print it for debugging purposes
 				down = velocity > 0
 				print("T=%d\tPedal %s" % (timestamp, "Down" if down else "Up  "))
+				pedal_status = down
+				if down:
+					for i in range(n_keys):
+						if key_status[i]:
+							pedaled_notes[i] = True
+				else:
+					for i in range(n_keys):
+						pedaled_notes[i] = False
 			elif status == important_statuses["note"]:
 				down = velocity > 0
 				print("T=%d\tNote=%d (%s) %s\tVel=%d" % (timestamp, note_number, number_to_note(note_number), "Down" if down else "Up  ", velocity))
@@ -81,14 +92,15 @@ try:
 				if down:
 					key_status[key_idx] = True
 					keypress_times[key_idx] = time.time()
+					if pedal_status:
+						pedaled_notes[key_idx] = True
 				else:
 					key_status[key_idx] = False
-					keypress_times[key_idx] = 0
 		#
 		# Update brightness levels
 		current_time = time.time()
 		for i in range(n_keys):
-			if(key_status[i] == False):
+			if(key_status[i] == False and not pedaled_notes[i]):
 				brightness[i] = 0
 			else:
 				brightness[i] = time_brightness_curve(current_time - keypress_times[i])
