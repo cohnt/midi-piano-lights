@@ -26,8 +26,8 @@ def key_idx_to_strip_leds(idx):
 	low = float(idx) / n_keys
 	high = float(idx+1) / n_keys
 	# Map to [0, n_pixels)
-	low = low * n_pixels
-	high = high * n_pixels
+	low = int(low * n_pixels)
+	high = int(high * n_pixels)
 	return range(low, high)
 
 def note_to_key_idx(note_number):
