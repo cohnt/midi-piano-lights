@@ -58,8 +58,9 @@ try:
 				continue
 			elif status == important_statuses["pedal"]:
 				down = velocity > 0
-				print("T=%d\tPedal%s" % (timestamp, down))
+				print("T=%d\tPedal %s" % (timestamp, "Down" if down else "Up"))
 			elif status == important_statuses["note"]:
-				print("T=%d\tNote=%d\tVel=%d" % (timestamp, note_number, velocity))
+				down = velocity > 0
+				print("T=%d\tNote=%d %s\tVel=%d" % (timestamp, note_number, "Down" if down else "Up", velocity))
 except KeyboardInterrupt:
 	print("Exiting...")
