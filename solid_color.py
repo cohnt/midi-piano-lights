@@ -19,6 +19,7 @@ max_vel_brightness = 90
 
 pedal_mode = True
 velocity_mode = True
+dim_mode = True
 
 key_status = [False for _ in range(n_keys)]
 keypress_times = [0 for _ in range(n_keys)]
@@ -101,7 +102,9 @@ try:
 			if(key_status[i] == False and not pedaled_notes[i]):
 				brightness[i] = 0
 			else:
-				brightness[i] = time_brightness_curve(current_time - keypress_times[i])
+				brightness[i] = 1
+				if dim_mode:
+					brightness[i] = time_brightness_curve(current_time - keypress_times[i])
 				if keypress_velocities[i] < max_vel_brightness:
 					brightness[i] = brightness[i] * (keypress_velocities[i] / max_vel_brightness)
 		#
