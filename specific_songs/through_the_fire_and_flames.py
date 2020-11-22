@@ -77,7 +77,7 @@ last_time = current_time
 try:
 	while True:
 		# Get new MIDI input if any is available
-		if input_device.poll():
+		while input_device.poll():
 			event = input_device.read(1)[0]
 
 			data = event[0]
