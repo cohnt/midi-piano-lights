@@ -27,11 +27,14 @@ domain_drift = 1 * math.pi
 domain_min = 0
 domain_max = 12 * math.pi
 domain_margin = math.pi
+max_vel_brightness = 90
 
 pedal_mode = False
+velocity_mode = True
 
 key_status = [False for _ in range(n_keys)]
 keypress_times = [0 for _ in range(n_keys)]
+keypress_velocities = [0 for _ in range(n_keys)]
 brightness = [0 for _ in range(n_keys)]
 pedal_status = False
 pedaled_notes = [False for _ in range(n_keys)]
@@ -109,6 +112,7 @@ try:
 				if down:
 					key_status[key_idx] = True
 					keypress_times[key_idx] = time.time()
+					keypress_velocities[key_idx] = velocity
 					if pedal_status:
 						pedaled_notes[key_idx] = True
 				else:
@@ -121,6 +125,8 @@ try:
 				brightness[i] = 0
 			else:
 				brightness[i] = time_brightness_curve(current_time - keypress_times[i])
+				if keypress_velocities[i] < max_vel_brightness:
+					brightness[i] = brightness[i] * (keypress_velocities[i] / max_vel_brightness)
 		#
 		# Update the pixels
 		for i in range(n_keys):
